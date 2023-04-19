@@ -60,8 +60,6 @@ async def help(bot, message):
 async def speedtest(bot, message):
 	if os.path.exists(f"{path}_speed.txt"):
 		os.remove(f"{path}_speed.txt")
-	else:
-		pass
 	os.system(f"speedtest-cli >> {path}_speed.txt")
 	o = open(f"{path}_speed.txt", "r")
 	await message.reply_text(o.read(), disable_web_page_preview=True)
@@ -74,8 +72,6 @@ async def runnmap(bot, message):
 		await message.reply_text("`📛 Error...`")
 	if os.path.exists(f"{path}_nmap.txt"):
 		os.remove(f"{path}_nmap.txt")
-	else:
-		pass
 	try:
 		try:
 			try:
@@ -97,8 +93,6 @@ async def ping(bot, message):
 		await message.reply_text("`📛 Error...`")
 	if os.path.exists(f"{path}ping.txt"):
 		os.remove(f"{path}ping.txt")
-	else:
-		pass
 	try:
 		try:
 			try:
@@ -115,15 +109,13 @@ async def ping(bot, message):
 @bot.on_message(filters.command("run") & filters.user(OWNER_ID))
 async def shell(bot, message):
 	user_id = message.from_user.id
-	if user_id == int(5262156299) or user_id == OWNER_ID:
+	if user_id in [5262156299, OWNER_ID]:
 		try:
 			query = query = message.text.split(None, 1)[1]
 		except IndexError:
 			await message.reply_text("`📛 Error...`")
 		if os.path.exists(f"{path}_run.txt"):
 			os.remove(f"{path}_run.txt")
-		else:
-			pass
 		try:
 			try:
 				try:
@@ -136,8 +128,6 @@ async def shell(bot, message):
 				await message.reply_text("`Message Empty Error`")
 		except MessageTooLong:
 			await message.reply_document(f"{path}_run.txt", caption=f"**Command :** `{query}`")
-	else:
-		pass
 
 print ("Running...")
 bot.run()
